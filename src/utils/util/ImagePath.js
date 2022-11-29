@@ -10,6 +10,12 @@ export const _banner = '../img/banner.png'
 export const _banner2 = '../img/banner2.png'
 export const _banner3 = '../img/banner3.png'
 
+export const _namlen = '../img/cate/aolennam.png'
+export const _namkhoac = '../img/cate/aokhoacnam.png'
+export const _nulen = '../img/cate/aolennu.png'
+export const _nukhoac = '../img/cate/aokhoacnu.png'
+export const _canifaz = '../img/cate/canifaz.png'
+
 
 export const _ggplay = '../img/googleplay.png'
 export const _appstore = '../img/appstore.png'
