@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     _background,
     _banner,
     _banner2,
     _banner3,
     _canifaz,
-    _namkhoac,
-    _namlen,
-    _nukhoac,
-    _nulen
 } from '../../../utils/util/ImagePath'
 import {
     FaTelegramPlane,
 } from "react-icons/fa";
-import { AiFillFacebook, AiFillInstagram, AiFillYoutube } from 'react-icons/ai';
 import HomeProduct from '../../../components/Home/Product/HomeProduct';
+import { useSelector, useDispatch } from 'react-redux';
+import { ManageProductReducer } from './../../../redux/Reducers/ManageProductReducer';
+import { GetAllProductAction } from '../../../redux/Actions/ManageProductAction';
 
 export default function Home() {
+    const dispatch = useDispatch();
+    const { lstProduct } = useSelector(state => state.ManageProductReducer);
+    useEffect(() => {
+        dispatch(GetAllProductAction())
+    }, [])
     return (
         <div style={{ backgroundImage: `url(${_background})` }}>
             <div className='bg-cyan-400 text-white py-2 text-base font-medium text-center'>
@@ -36,7 +39,12 @@ export default function Home() {
                     <img className='h-96' src={_banner3} alt='banner3' />
                 </div>
             </div>
-            <HomeProduct />
+            <div className='mx-16 grid grid-cols-2 flex-wrap'>
+                {lstProduct.slice(0, 4).map((item, index) => {
+                    return <HomeProduct key={index} clothes={item} />
+                })}
+            </div>
+
             <div className='mx-16 mt-4'>
                 <img className='w-full' src={_canifaz} alt='Canifa Z' />
             </div>
