@@ -7,7 +7,9 @@ import {
   _account,
   _add,
   _admin,
+  _bill,
   _cart,
+  _detail,
   _edit,
   _female,
   _home,
@@ -32,6 +34,8 @@ import UpdateAccount from './pages/Client/Account/UpdateAccount';
 import MaleProduct from './pages/Client/Product/MaleProduct';
 import FemaleProduct from './pages/Client/Product/FemaleProduct';
 import ShoppingCart from './pages/Client/ShoppingCart/ShoppingCart';
+import ManageBill from './pages/Admin/Bill/ManageBill';
+import DetailBill from './pages/Admin/Bill/DetailBill';
 
 
 
@@ -65,6 +69,10 @@ export default function App() {
         <AdminTemplate path={`${_admin}${_product}`} exact Component={ManageProduct} />
         <AdminTemplate path={`${_admin}${_product}${_add}`} exact Component={AddProduct} />
         <AdminTemplate path={`${_admin}${_product}${_edit}/:id`} exact Component={EditProduct} />
+
+        <AdminTemplate path={`${_admin}${_bill}`} exact Component={ManageBill} />
+        <AdminTemplate path={`${_admin}${_bill}${_detail}/:id`} exact Component={DetailBill} />
+
 
 
 

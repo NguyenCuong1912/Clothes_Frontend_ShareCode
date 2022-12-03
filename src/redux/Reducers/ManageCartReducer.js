@@ -1,8 +1,11 @@
-import { ADD_CART, CLEAR_CART, DELETE_CART, UPDATE_CART } from "../Types/ManageCartType"
+import { ADD_CART, CLEAR_CART, DELETE_CART, GET_BILL_DETAIL, GET_CHECKOUT_HISTORY, GET_LIST_BILL, UPDATE_CART } from "../Types/ManageCartType"
 
 
 const initialState = {
-    cart: []
+    cart: [],
+    lstBill: [],
+    cartHistory: [],
+    lstBillDetail: []
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -51,10 +54,23 @@ export const ManageCartReducer = (state = initialState, { type, data }) => {
             return { ...state, cart: delCart }
         }
 
-
         case CLEAR_CART:
             return { ...state, cart: [] }
 
+        case GET_LIST_BILL: {
+            state.lstBill = data
+            return { ...state }
+        }
+
+        case GET_CHECKOUT_HISTORY: {
+            state.cartHistory = data
+            return { ...state }
+        }
+
+        case GET_BILL_DETAIL: {
+            state.lstBillDetail = data
+            return { ...state }
+        }
 
         default:
             return state

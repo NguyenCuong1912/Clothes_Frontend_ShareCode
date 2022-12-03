@@ -1,6 +1,6 @@
 import { message } from "antd";
 import { _home, _login } from "../../utils/util/ConfigPath";
-import { CLEAR_CART, GET_LIST_CART } from "../Types/ManageCartType";
+import { CLEAR_CART, GET_BILL_DETAIL, GET_CHECKOUT_HISTORY, GET_LIST_BILL } from "../Types/ManageCartType";
 import { USER_LOGIN } from "../Types/ManageUserType"
 import { history } from './../../App';
 import { manageCheckoutService } from './../../services/ManageCheckoutService';
@@ -46,13 +46,48 @@ export const GetListBill = () => {
     return async dispatch => {
         try {
             const result = await manageCheckoutService.getListBill();
-            console.log('result', result)
-            // if (result.status === 200) {
-            //     dispatch({
-            //         type: GET_LIST_CART,
-            //         data: result.data,
-            //     })
-            // }
+            if (result.status === 200) {
+                dispatch({
+                    type: GET_LIST_BILL,
+                    data: result.data,
+                })
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+            message.warning('Lấy thông tin không thành công!')
+        }
+    }
+}
+
+export const GetBillDetail = (id) => {
+    return async dispatch => {
+        try {
+            const result = await manageCheckoutService.getBillDetail(id);
+            if (result.status === 200) {
+                dispatch({
+                    type: GET_BILL_DETAIL,
+                    data: result.data,
+                })
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+            message.warning('Lấy thông tin không thành công!')
+        }
+    }
+}
+
+
+export const GetCheckoutHistory = () => {
+    return async dispatch => {
+        const id = JSON.parse(sessionStorage.getItem("USER_LOGIN")).account.id;
+        try {
+            const result = await manageCheckoutService.getCheckout(id);
+            if (result.status === 200) {
+                dispatch({
+                    type: GET_CHECKOUT_HISTORY,
+                    data: result.data,
+                })
+            }
         } catch (error) {
             console.log('error', error.response?.data)
             message.warning('Lấy thông tin không thành công!')

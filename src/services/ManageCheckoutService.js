@@ -13,6 +13,14 @@ class ManageCheckoutService extends baseService {
         return this.post('Checkout', data)
     }
 
+    getBillDetail = (id) => {
+        return this.get(`Checkout/Detail/${id}`)
+    }
+
+    getCheckout = (Id) => {
+        return this.get(`Checkout/ByAccount/${Id}`)
+    }
+
 
     getListBill = () => {
         return this.get(`Checkout`)

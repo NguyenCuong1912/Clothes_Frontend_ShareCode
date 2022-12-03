@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Redirect, Route } from 'react-router';
 import { Layout, Menu, message } from 'antd';
 import { history } from './../../App';
-import { _account, _admin, _home, _login, _product } from '../../utils/util/ConfigPath';
+import { _account, _admin, _bill, _home, _login, _product } from '../../utils/util/ConfigPath';
 import { UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { USER_LOGIN } from '../../redux/Types/ManageUserType';
@@ -10,6 +10,7 @@ import { _logo } from '../../utils/util/ImagePath';
 import { useSelector } from 'react-redux';
 import _ from 'lodash'
 import { FcShop } from 'react-icons/fc';
+import { BsCardText } from 'react-icons/bs';
 
 
 
@@ -64,9 +65,9 @@ export default function AdminTemplate(props) {
                         <Menu.Item key='3' icon={<FcShop style={{ fontSize: 20 }} />}>
                             <NavLink to={`${_admin}${_product}`}>Clothes</NavLink>
                         </Menu.Item>
-                        {/* <Menu.Item key='4' icon={<BsCardText style={{ fontSize: 20 }} />} >
+                        <Menu.Item key='4' icon={<BsCardText style={{ fontSize: 20 }} />} >
                             <NavLink to={`${_admin}${_bill}`}>Bill</NavLink>
-                        </Menu.Item> */}
+                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">

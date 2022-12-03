@@ -1,7 +1,117 @@
-import React from 'react'
+import { Input, Table } from 'antd'
+import React, { Fragment, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { GetListBill } from '../../../redux/Actions/ManageCheckoutAction';
+import { AiFillHeart, AiOutlineMore } from 'react-icons/ai';
+import moment from 'moment'
+import { history } from '../../../App';
+import { _admin, _bill, _detail } from '../../../utils/util/ConfigPath';
+
+
+const { Search } = Input;
 
 export default function ManageBill() {
+    const dispatch = useDispatch();
+
+
+    const { lstBill } = useSelector(state => state.ManageCartReducer);
+    useEffect(() => {
+        dispatch(GetListBill())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    const onSearch = (value) => {
+        console.log(value)
+    };
+
+    const columns = [
+        {
+            title: 'Tài khoản',
+            dataIndex: 'Username',
+            render: (text, cart) => {
+                return <span title='Chi tiết hóa đơn' onClick={() => {
+                    history.push(`${_admin}${_bill}${_detail}/${cart.id}`)
+                }} className='text-base hover:underline cursor-pointer hover:text-green-500'>
+                    {cart.Account.Username}
+                </span>
+            }
+        },
+        {
+            title: 'Số điện thoại',
+            dataIndex: 'PhoneNumber',
+            render: (text, cart) => {
+                return <span className='text-base'>
+                    {cart.Account.PhoneNumber === null ? <marquee>
+                        <div className='flex text-base'>
+                            <span className='text-green-500'>GiftLove</span>
+                            <span className='text-2xl pl-2 text-red-500'><AiFillHeart /></span>
+                        </div>
+                    </marquee> : <span>{cart.Account.PhoneNumber}</span>}
+                </span>
+            }
+
+        },
+        {
+            title: 'Địa chỉ',
+            dataIndex: 'Address',
+            render: (text, cart) => {
+                return <span className='text-base'>
+                    {cart.Account.Address === null ? <marquee>
+                        <div className='flex text-base'>
+                            <span className='text-green-500'>GiftLove</span>
+                            <span className='text-2xl pl-2 text-red-500'><AiFillHeart /></span>
+                        </div>
+                    </marquee> : <span>{cart.Account.Address}</span>}
+                </span>
+            }
+
+        },
+        {
+            title: 'Tổng tiền',
+            dataIndex: 'TotalMoney',
+            render: (text, cart) => {
+                return <span className='text-base font-medium text-red-500'>
+                    {(cart.TotalMoney * 1).toLocaleString()} <span className='underline'>đ</span>
+                </span>
+            }
+        },
+        {
+            title: 'Ngày thanh toán',
+            dataIndex: 'createdAt',
+            render: (text, cart) => {
+                return <span className='text-base'>
+                    {moment(cart.createdAt).format('DD/MM/YYYY')}
+                </span>
+            }
+
+        },
+
+        {
+            title: '',
+            dataIndex: 'id',
+            render: (text, item) => {
+                return <div className='flex'>
+                    <button className='mx-4 text-green-500 hover:text-green-900' title='Xem chi tiết hóa đơn' onClick={() => {
+                        history.push(`${_admin}${_bill}${_detail}/${item.id}`)
+                    }}>
+                        <AiOutlineMore style={{ fontSize: 30 }} />
+                    </button>
+                </div>
+            },
+            width: '10%'
+
+        },
+    ]
     return (
-        <div>ManageBill</div>
+        <Fragment>
+            <div className='container mt-4'>
+                <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý hóa đơn</h2>
+                <div className='my-10 flex justify-end'>
+                    <div className='w-1/3'>
+                        <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={onSearch} enterButton />
+                    </div>
+                </div>
+                <Table dataSource={lstBill} columns={columns} rowKey='id' />;
+            </div>
+        </Fragment>
     )
 }
