@@ -15,7 +15,6 @@ export default function FemaleProduct() {
     const { lstProduct } = useSelector(state => state.ManageProductReducer);
 
     const lstFemale = lstProduct.filter(lstProduct => lstProduct.TypeGender === false);
-    console.log('a', lstFemale)
 
 
     useEffect(() => {

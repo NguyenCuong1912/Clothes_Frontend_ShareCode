@@ -7,6 +7,7 @@ import {
   _account,
   _add,
   _admin,
+  _cart,
   _edit,
   _female,
   _home,
@@ -30,6 +31,7 @@ import DetailAccount from './pages/Client/Account/DetailAccount';
 import UpdateAccount from './pages/Client/Account/UpdateAccount';
 import MaleProduct from './pages/Client/Product/MaleProduct';
 import FemaleProduct from './pages/Client/Product/FemaleProduct';
+import ShoppingCart from './pages/Client/ShoppingCart/ShoppingCart';
 
 
 
@@ -41,6 +43,7 @@ export default function App() {
     <Router history={history}>
       <Switch>
         <HomeTemplate path={_home} exact Component={Home} />
+        <HomeTemplate path={_cart} exact Component={ShoppingCart} />
         <HomeTemplate path={_male} exact Component={MaleProduct} />
         <HomeTemplate path={_female} exact Component={FemaleProduct} />
 

@@ -1,7 +1,11 @@
 import React from 'react'
 import { DOMAIN_IMG } from '../../../utils/Settings/config';
+import { useDispatch } from 'react-redux';
+import { ADD_CART } from '../../../redux/Types/ManageCartType';
+import { message } from 'antd';
 
 export default function OneProduct(props) {
+    const dispatch = useDispatch();
     const { clothes } = props;
     return (
         <div className='border m-4 relative'>
@@ -12,7 +16,16 @@ export default function OneProduct(props) {
                 <div className='text-red-600 font-bold'>{(clothes.Price - clothes.Price * clothes.Discount / 100).toLocaleString()}<span className='underline'>đ</span></div>
                 <div className='line-through'>{(clothes.Price * 1).toLocaleString()} <span className='underline'>đ</span></div>
                 <div className='w-full text-center my-4'>
-                    <button className='px-4 py-2 font-medium border rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white'>Thêm vào giỏ hàng</button>
+                    <button type='button' onClick={() => {
+                        dispatch({
+                            type: ADD_CART,
+                            data: {
+                                item: clothes,
+                                number: 1
+                            }
+                        })
+                        message.success('Sản phẩm đã được thêm vào giỏ hàng')
+                    }} className='px-4 py-2 font-medium border rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white'>Thêm vào giỏ hàng</button>
                 </div>
             </div>
         </div>

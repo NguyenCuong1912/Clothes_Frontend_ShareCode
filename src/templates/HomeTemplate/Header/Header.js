@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import TopSlick from '../../../components/Home/Slick/TopSlick';
 import { _logo } from './../../../utils/util/ImagePath';
 import { NavLink } from 'react-router-dom';
-import { _account, _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { _account, _cart, _home, _login, _register } from './../../../utils/util/ConfigPath';
 import NavHeader from '../../../components/Home/Navbar/NavHeader';
 import {
     AiOutlineShopping,
@@ -18,6 +18,13 @@ import { history } from '../../../App';
 export default function Header() {
 
     const { userLogin } = useSelector(state => state.ManageUserReducer);
+
+    const { cart } = useSelector(state => state.ManageCartReducer);
+
+    let number = 0;
+    cart?.forEach(element => {
+        number += element.Quantity
+    });
 
     const menu = (
         <Menu
@@ -86,10 +93,13 @@ export default function Header() {
                 </div>
                 <div className='col-span-4'>
                     <div className='grid grid-cols-5 h-full content-center'>
-                        <div className='col-start-3 col-span-2'>
+                        <div className='col-start-2 col-span-3'>
                             <div className='h-full flex items-center justify-end'>
                                 {operations}
-                                <AiOutlineShopping className='mx-2 text-2xl text-gray-400' />
+                                <NavLink to={_cart} className='flex'>
+                                    <AiOutlineShopping className='mx-2 text-2xl text-gray-400' />
+                                    <span className='text-red-500 -ml-2'>({number})</span>
+                                </NavLink>
                             </div>
                         </div>
                     </div>
