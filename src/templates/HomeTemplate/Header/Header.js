@@ -2,10 +2,9 @@ import React, { Fragment } from 'react'
 import TopSlick from '../../../components/Home/Slick/TopSlick';
 import { _logo } from './../../../utils/util/ImagePath';
 import { NavLink } from 'react-router-dom';
-import { _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { _account, _home, _login, _register } from './../../../utils/util/ConfigPath';
 import NavHeader from '../../../components/Home/Navbar/NavHeader';
 import {
-    AiOutlineSearch,
     AiOutlineShopping,
     AiOutlineUser,
 } from "react-icons/ai";
@@ -25,7 +24,7 @@ export default function Header() {
             items={[
                 {
                     label: <button onClick={() => {
-                        // history.push(`${_account}`);
+                        history.push(`${_account}`);
                         window.location.reload();
                     }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
                     key: '0',
@@ -87,13 +86,7 @@ export default function Header() {
                 </div>
                 <div className='col-span-4'>
                     <div className='grid grid-cols-5 h-full content-center'>
-                        <div className='col-span-3 '>
-                            <div className='w-4/5 ml-16 flex items-center text-gray-400 rounded-full' style={{ backgroundColor: '#333F48' }}>
-                                <AiOutlineSearch className='text-2xl ml-2' />
-                                <input className='text-lg font-medium py-1 px-2 w-full rounded-full' placeholder="Bạn tìm gì..." style={{ backgroundColor: '#333F48' }} />
-                            </div>
-                        </div>
-                        <div className='col-span-2'>
+                        <div className='col-start-3 col-span-2'>
                             <div className='h-full flex items-center justify-end'>
                                 {operations}
                                 <AiOutlineShopping className='mx-2 text-2xl text-gray-400' />

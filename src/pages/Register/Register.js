@@ -17,7 +17,7 @@ export default function Register() {
         initialValues: {
             Username: '',
             Password: '',
-            Role: "ADMIN"
+            Role: "CLIENT"
         },
         validationSchema: Yup.object({
             Username: Yup.string()
@@ -61,7 +61,7 @@ export default function Register() {
                             <button type='submit' style={{ backgroundColor: '#333F48' }} className="block mx-auto text-white text-base font-medium uppercase rounded shadow-md px-6 py-2">Đăng ký</button>
                             <div className='mt-4'>
                                 <span>Bạn đã có tài khoản?
-                                    <NavLink to={_login} className='text-red-500 hover:text-red-700'>Đăng nhập</NavLink>
+                                    <NavLink to={_login} className='ml-2 text-red-500 hover:text-red-700'>Đăng nhập</NavLink>
                                 </span>
                             </div>
                         </div>

@@ -2,13 +2,14 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Redirect, Route } from 'react-router';
 import { Layout, Menu, message } from 'antd';
 import { history } from './../../App';
-import { _account, _admin, _home, _login } from '../../utils/util/ConfigPath';
+import { _account, _admin, _home, _login, _product } from '../../utils/util/ConfigPath';
 import { UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { USER_LOGIN } from '../../redux/Types/ManageUserType';
 import { _logo } from '../../utils/util/ImagePath';
 import { useSelector } from 'react-redux';
 import _ from 'lodash'
+import { FcShop } from 'react-icons/fc';
 
 
 
@@ -59,13 +60,11 @@ export default function AdminTemplate(props) {
                         <Menu.Item key='1' icon={<UserOutlined style={{ fontSize: 20 }} />}>
                             <NavLink to={`${_admin}${_account}`} >Accounts</NavLink>
                         </Menu.Item>
-                        {/* <Menu.Item key='2' icon={<BsFlower1 style={{ fontSize: 20 }} />}>
-                            <NavLink to={`${_admin}${_group}`}>Group Flower</NavLink>
+
+                        <Menu.Item key='3' icon={<FcShop style={{ fontSize: 20 }} />}>
+                            <NavLink to={`${_admin}${_product}`}>Clothes</NavLink>
                         </Menu.Item>
-                        <Menu.Item key='3' icon={<FcCloseUpMode style={{ fontSize: 20 }} />}>
-                            <NavLink to={`${_admin}${_product}`}>Flowers</NavLink>
-                        </Menu.Item>
-                        <Menu.Item key='4' icon={<BsCardText style={{ fontSize: 20 }} />} >
+                        {/* <Menu.Item key='4' icon={<BsCardText style={{ fontSize: 20 }} />} >
                             <NavLink to={`${_admin}${_bill}`}>Bill</NavLink>
                         </Menu.Item> */}
                     </Menu>
@@ -82,7 +81,7 @@ export default function AdminTemplate(props) {
                         </div>
                     </Content>
                     <Footer style={{ textAlign: 'center', }}>
-                        Ant Design ©2018 Created by Ant UED
+                        Created by Hai Dang
                     </Footer>
                 </Layout>
             </Layout>

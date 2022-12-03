@@ -6,14 +6,18 @@ export const _fixtop2 = '../img/fixtop2.png'
 export const _logo = '../img/logo.png'
 export const _background = '../img/background.png'
 
-export const _banner = '../img/banner.png'
-export const _banner2 = '../img/banner2.png'
-export const _banner3 = '../img/banner3.png'
+export const _banner = '../img/banner/banner.png'
+export const _banner2 = '../img/banner/banner2.png'
+export const _banner3 = '../img/banner/banner3.png'
+export const _banner_nam = '../img/banner/banner_nam_1.png'
+export const _banner_nu = '../img/banner/banner_nu_1.png'
 
-export const _namlen = '../img/cate/aolennam.png'
-export const _namkhoac = '../img/cate/aokhoacnam.png'
-export const _nulen = '../img/cate/aolennu.png'
-export const _nukhoac = '../img/cate/aokhoacnu.png'
+
+
+export const _namni = '../img/product/aoninam.png'
+export const _namkhoac = '../img/product/khoacnam.png'
+export const _nuni = '../img/product/aoninu.png'
+export const _nukhoac = '../img/product/khoacnu.png'
 export const _canifaz = '../img/cate/canifaz.png'
 
 

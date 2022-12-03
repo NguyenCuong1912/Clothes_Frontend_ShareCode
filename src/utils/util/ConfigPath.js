@@ -6,6 +6,10 @@ export const _detail = '/detail'
 export const _cart = '/cart'
 export const _order = '/order'
 
+export const _male = '/male'
+export const _female = '/female'
+
+
 
 
 

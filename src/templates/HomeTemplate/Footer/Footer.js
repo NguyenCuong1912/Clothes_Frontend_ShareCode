@@ -53,7 +53,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className='mx-12 py-4 text-white flex justify-between'>
-                <div>@ 2022 CANIFA</div>
+                <div>Created by Hai Dang</div>
                 <div className='flex'>Visit Us <AiFillFacebook title='Facebook' className='text-2xl mx-2 cursor-pointer' /> <AiFillInstagram title='Instagram' className='text-2xl mx-2 cursor-pointer' /></div>
             </div>
         </div>

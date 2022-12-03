@@ -1,0 +1,134 @@
+import React, { Fragment, useState } from 'react'
+import { Input, Select } from 'antd';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import { history } from '../../../App';
+import { _admin, _product } from '../../../utils/util/ConfigPath';
+import { AiOutlineRollback } from 'react-icons/ai';
+import { AddProductAction } from '../../../redux/Actions/ManageProductAction';
+
+export default function AddProduct() {
+    const { TextArea } = Input;
+
+    const dispatch = useDispatch();
+
+
+
+    const formik = useFormik({
+        initialValues: {
+            ProductName: '',
+            TypeGender: '',
+            Price: '',
+            Discount: 0,
+            Description: '',
+            products: {},
+        },
+        onSubmit: values => {
+
+            // console.log('values', values)
+            values.Discount *= 1;
+
+            let dataClothes = new FormData();
+            for (let key in values) {
+                if (key !== 'products') {
+                    dataClothes.append(key, values[key]);
+                }
+                else {
+                    dataClothes.append('products', values.products, values.products.name);
+                }
+            }
+
+            dispatch(AddProductAction(dataClothes));
+
+        }
+    })
+    function changeSelect(value) {
+        formik.setFieldValue('TypeGender', value)
+    }
+    const [img, setImg] = useState('');
+    const handleChangeFile = (e) => {
+
+        let file = e.target.files[0]
+        if (file.type === 'image/jpeg' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png') {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                setImg(e.target.result) //Hinh base 64
+            }
+            formik.setFieldValue('products', file)
+        }
+
+    }
+    return (
+        <Fragment>
+            <div>
+                <div>
+                    <button type='button' title='Trở về trang sản phẩm' className='text-2xl py-2 px-5 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-500 hover:text-white' onClick={() => {
+                        history.push(`${_admin}${_product}`)
+                    }}>
+                        <AiOutlineRollback />
+                    </button>
+                </div>
+                <h1 className='text-center text-4xl font-bold text-red-500'>Thêm sản phẩm</h1>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className='grid grid-cols-7'>
+                        <div className='col-start-2 col-span-2 mr-4'>
+                            <div className='my-4'>
+                                <div>Tên sản phẩm:</div>
+                                <input type='text' name='ProductName'
+                                    onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Tên sản phẩm...' />
+                            </div>
+                            <div className='my-4'>
+                                <div>Giới tính:</div>
+                                <Select
+                                    defaultValue="Nam"
+
+                                    className='w-2/3 drop-shadow-lg' size='large' placeholder='Chọn giới tính...' name='TypeGender'
+                                    onChange={changeSelect}
+                                    options={[
+                                        {
+                                            value: true,
+                                            label: 'Nam',
+                                        },
+                                        {
+                                            value: false,
+                                            label: 'Nữ',
+                                        },
+
+                                    ]}
+                                />
+
+                            </div>
+                            <div className='my-4'>
+                                <div>Giá tiền:</div>
+                                <input type='text' name='Price' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Giá tiền...' />
+                            </div>
+                            <div className='my-4'>
+                                <div>Ưu đãi:</div>
+                                <input type='text' name='Discount' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Ưu đãi...' />
+                            </div>
+                            <div className='my-4'>
+                                <span className='mr-2'>Hình ảnh:</span>
+                                <input name='products' type='file' onChange={handleChangeFile} accept='image/jpeg, image/jpg, image/png' />
+                            </div>
+                            <div className='my-4'>
+                                <img className='w-36 h-36 rounded-md' src={img} alt='...' />
+                            </div>
+                        </div>
+                        <div className='col-span-3 ml-4'>
+                            <div className='my-4'>
+                                <div>Mô tả:</div>
+                                <TextArea name='Description' onChange={formik.handleChange} rows={9} style={{ boxShadow: 'rgb(0 0 0 / 10%) 0px 10px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px' }} />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className='text-center'>
+                        <button type='submit' className='text-center p-3 border border-red-600 w-36 text-xl font-bold rounded text-red-600 hover:bg-red-600 hover:text-white'>Thêm</button>
+                    </div>
+                </form>
+
+            </div>
+        </Fragment>
+    )
+}

@@ -58,7 +58,7 @@ export default function Login() {
                             <button type='submit' style={{ backgroundColor: '#333F48' }} className="block mx-auto text-white text-base font-medium uppercase rounded shadow-md px-6 py-2">Đăng nhập</button>
                             <div className='mt-4'>
                                 <span>Bạn chưa có tài khoản?
-                                    <NavLink to={_register} className='text-red-500 hover:text-red-700'>Đăng ký</NavLink>
+                                    <NavLink to={_register} className='ml-2 text-red-500 hover:text-red-700'>Đăng ký</NavLink>
                                 </span>
                             </div>
                         </form>
