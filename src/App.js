@@ -15,6 +15,7 @@ import {
   _home,
   _login,
   _male,
+  _order,
   _product,
   _register
 } from './utils/util/ConfigPath';
@@ -36,6 +37,7 @@ import FemaleProduct from './pages/Client/Product/FemaleProduct';
 import ShoppingCart from './pages/Client/ShoppingCart/ShoppingCart';
 import ManageBill from './pages/Admin/Bill/ManageBill';
 import DetailBill from './pages/Admin/Bill/DetailBill';
+import OrderHistory from './pages/Client/Account/OrderHistory';
 
 
 
@@ -50,6 +52,8 @@ export default function App() {
         <HomeTemplate path={_cart} exact Component={ShoppingCart} />
         <HomeTemplate path={_male} exact Component={MaleProduct} />
         <HomeTemplate path={_female} exact Component={FemaleProduct} />
+        <HomeTemplate path={`${_order}/:id`} exact Component={OrderHistory} />
+
 
 
 

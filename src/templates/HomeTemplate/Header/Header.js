@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import TopSlick from '../../../components/Home/Slick/TopSlick';
 import { _logo } from './../../../utils/util/ImagePath';
 import { NavLink } from 'react-router-dom';
-import { _account, _cart, _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { _account, _cart, _home, _login, _order, _register } from './../../../utils/util/ConfigPath';
 import NavHeader from '../../../components/Home/Navbar/NavHeader';
 import {
     AiOutlineShopping,
@@ -39,7 +39,7 @@ export default function Header() {
                 {
                     label: <Fragment>
                         <button onClick={() => {
-                            // history.push(`${_order}/${userLogin.account.id}`);
+                            history.push(`${_order}/${userLogin.account.id}`);
                             window.location.reload();
                         }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>
                     </Fragment>,
