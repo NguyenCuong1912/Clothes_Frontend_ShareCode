@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { Input, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { history } from '../../../App';
 import { _admin, _product } from '../../../utils/util/ConfigPath';
 import { AiOutlineRollback } from 'react-icons/ai';
@@ -13,8 +14,9 @@ export default function AddProduct() {
     const dispatch = useDispatch();
 
 
-
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
             ProductName: '',
             TypeGender: '',
@@ -23,9 +25,26 @@ export default function AddProduct() {
             Description: '',
             products: {},
         },
+        validationSchema: Yup.object({
+            ProductName: Yup.string()
+                .required("Không được trống !"),
+
+            TypeGender: Yup.string()
+                .required("Không được trống !"),
+
+            Price: Yup.string().matches(phoneRegExp, 'Giá tiền phải là số...')
+                .required("Không được trống !"),
+
+            Discount: Yup.string()
+                .required("Không được trống !"),
+
+            Description: Yup.string()
+                .required("Không được trống !"),
+
+
+        }),
         onSubmit: values => {
 
-            // console.log('values', values)
             values.Discount *= 1;
 
             let dataClothes = new FormData();
@@ -77,12 +96,14 @@ export default function AddProduct() {
                                 <div>Tên sản phẩm:</div>
                                 <input type='text' name='ProductName'
                                     onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Tên sản phẩm...' />
+                                {formik.errors.ProductName && formik.touched.ProductName && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.ProductName}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Giới tính:</div>
                                 <Select
-                                    defaultValue="Nam"
-
+                                    defaultValue="Chọn giới tính..."
                                     className='w-2/3 drop-shadow-lg' size='large' placeholder='Chọn giới tính...' name='TypeGender'
                                     onChange={changeSelect}
                                     options={[
@@ -97,15 +118,23 @@ export default function AddProduct() {
 
                                     ]}
                                 />
-
+                                {formik.errors.TypeGender && formik.touched.TypeGender && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.TypeGender}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Giá tiền:</div>
                                 <input type='text' name='Price' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Giá tiền...' />
+                                {formik.errors.Price && formik.touched.Price && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Price}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Ưu đãi:</div>
                                 <input type='text' name='Discount' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Ưu đãi...' />
+                                {formik.errors.Discount && formik.touched.Discount && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Discount}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <span className='mr-2'>Hình ảnh:</span>
@@ -114,11 +143,15 @@ export default function AddProduct() {
                             <div className='my-4'>
                                 <img className='w-36 h-36 rounded-md' src={img} alt='...' />
                             </div>
+
                         </div>
                         <div className='col-span-3 ml-4'>
                             <div className='my-4'>
                                 <div>Mô tả:</div>
                                 <TextArea name='Description' onChange={formik.handleChange} rows={9} style={{ boxShadow: 'rgb(0 0 0 / 10%) 0px 10px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px' }} />
+                                {formik.errors.Description && formik.touched.Description && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Description}</p>
+                                )}
                             </div>
                         </div>
 

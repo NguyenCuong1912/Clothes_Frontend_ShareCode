@@ -6,6 +6,7 @@ import { AiFillHeart, AiOutlineMore } from 'react-icons/ai';
 import moment from 'moment'
 import { history } from '../../../App';
 import { _admin, _bill, _detail } from '../../../utils/util/ConfigPath';
+import { BsCalendar } from 'react-icons/bs';
 
 
 const { Search } = Input;
@@ -104,7 +105,9 @@ export default function ManageBill() {
     return (
         <Fragment>
             <div className='container mt-4'>
-                <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý hóa đơn</h2>
+                <div className='flex justify-center'>
+                    <h2 className='text-4xl font-bold text-red-500 flex items-center'><BsCalendar className='mx-2' />Quản lý hóa đơn</h2>
+                </div>
                 <div className='my-10 flex justify-end'>
                     <div className='w-1/3'>
                         <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={onSearch} enterButton />
