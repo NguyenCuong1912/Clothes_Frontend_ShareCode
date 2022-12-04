@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteProductAction, GetAllProductAction } from '../../../redux/Actions/ManageProductAction';
 import { DOMAIN_IMG } from '../../../utils/Settings/config';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { BsShop } from 'react-icons/bs';
 
 
 const { Search } = Input;
@@ -118,7 +119,10 @@ export default function ManageProduct() {
     return (
         <Fragment>
             <div className='mt-4'>
-                <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý quần áo</h2>
+                <div className='flex justify-center'>
+                    <h2 className='text-4xl font-bold text-red-500 flex items-center'><BsShop className='mx-2' />Quản lý quần áo</h2>
+
+                </div>
                 <div className='my-10 flex justify-between'>
                     <button type='button' className='border-2 border-red-600 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
                         history.push(`${_admin}${_product}${_add}`)
