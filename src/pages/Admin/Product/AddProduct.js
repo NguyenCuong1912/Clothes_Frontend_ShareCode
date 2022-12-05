@@ -14,7 +14,7 @@ export default function AddProduct() {
     const dispatch = useDispatch();
 
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+    const numberRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -32,7 +32,7 @@ export default function AddProduct() {
             TypeGender: Yup.string()
                 .required("Không được trống !"),
 
-            Price: Yup.string().matches(phoneRegExp, 'Giá tiền phải là số...')
+            Price: Yup.string().matches(numberRegExp, 'Giá tiền phải là số...')
                 .required("Không được trống !"),
 
             Discount: Yup.string()

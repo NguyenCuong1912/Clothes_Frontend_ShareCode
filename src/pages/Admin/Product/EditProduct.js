@@ -1,5 +1,6 @@
 import { Input, Select } from 'antd';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../App';
@@ -24,6 +25,9 @@ export default function EditProduct(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const numberRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -34,6 +38,24 @@ export default function EditProduct(props) {
             Description: detailProduct.Description,
             products: null,
         },
+        validationSchema: Yup.object({
+            ProductName: Yup.string()
+                .required("Không được trống !"),
+
+            TypeGender: Yup.string()
+                .required("Không được trống !"),
+
+            Price: Yup.string().matches(numberRegExp, 'Giá tiền phải là số...')
+                .required("Không được trống !"),
+
+            Discount: Yup.string()
+                .required("Không được trống !"),
+
+            Description: Yup.string()
+                .required("Không được trống !"),
+
+
+        }),
         onSubmit: values => {
             values.Discount *= 1;
 
@@ -88,6 +110,9 @@ export default function EditProduct(props) {
                                 <div>Tên sản phẩm:</div>
                                 <input type='text' name='ProductName'
                                     onChange={formik.handleChange} value={formik.values.ProductName} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Tên sản phẩm...' />
+                                {formik.errors.ProductName && formik.touched.ProductName && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.ProductName}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Giới tính:</div>
@@ -107,15 +132,23 @@ export default function EditProduct(props) {
 
                                     ]}
                                 />
-
+                                {formik.errors.TypeGender && formik.touched.TypeGender && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.TypeGender}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Giá tiền:</div>
                                 <input type='text' name='Price' onChange={formik.handleChange} value={formik.values.Price} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Giá tiền...' />
+                                {formik.errors.Price && formik.touched.Price && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Price}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <div>Ưu đãi:</div>
                                 <input type='text' name='Discount' onChange={formik.handleChange} value={formik.values.Discount} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Ưu đãi...' />
+                                {formik.errors.Discount && formik.touched.Discount && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Discount}</p>
+                                )}
                             </div>
                             <div className='my-4'>
                                 <span className='mr-2'>Hình ảnh:</span>
@@ -129,6 +162,9 @@ export default function EditProduct(props) {
                             <div className='my-4'>
                                 <div>Mô tả:</div>
                                 <TextArea name='Description' onChange={formik.handleChange} value={formik.values.Description} rows={9} style={{ boxShadow: 'rgb(0 0 0 / 10%) 0px 10px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px' }} />
+                                {formik.errors.Description && formik.touched.Description && (
+                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Description}</p>
+                                )}
                             </div>
                         </div>
 
