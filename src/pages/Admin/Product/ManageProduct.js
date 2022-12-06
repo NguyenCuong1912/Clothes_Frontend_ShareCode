@@ -99,11 +99,11 @@ export default function ManageProduct() {
                     </button>
                     <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa'>
                         <Popconfirm
-                            title="Bạn có muốn xóa sản phẩm không?"
+                            title="Bạn có chắc muốn xóa sản phẩm không?"
                             onConfirm={() => { dispatch(DeleteProductAction(item.id)) }}
                             onCancel={cancel}
-                            okText="Yes"
-                            cancelText="No"
+                            okText="Có"
+                            cancelText="Không"
                         >
                             <DeleteOutlined style={{ fontSize: 25 }} />
                         </Popconfirm>

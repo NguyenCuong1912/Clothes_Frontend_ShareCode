@@ -14,7 +14,6 @@ export default function AddProduct() {
     const dispatch = useDispatch();
 
 
-    const numberRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -32,10 +31,10 @@ export default function AddProduct() {
             TypeGender: Yup.string()
                 .required("Không được trống !"),
 
-            Price: Yup.string().matches(numberRegExp, 'Giá tiền phải là số...')
+            Price: Yup.number()
                 .required("Không được trống !"),
 
-            Discount: Yup.string()
+            Discount: Yup.number()
                 .required("Không được trống !"),
 
             Description: Yup.string()
@@ -124,14 +123,14 @@ export default function AddProduct() {
                             </div>
                             <div className='my-4'>
                                 <div>Giá tiền:</div>
-                                <input type='text' name='Price' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Giá tiền...' />
+                                <input type='number' name='Price' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Giá tiền...' />
                                 {formik.errors.Price && formik.touched.Price && (
                                     <p className='m-0 mt-1 text-red-600'>{formik.errors.Price}</p>
                                 )}
                             </div>
                             <div className='my-4'>
                                 <div>Ưu đãi:</div>
-                                <input type='text' name='Discount' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Ưu đãi...' />
+                                <input type='number' name='Discount' onChange={formik.handleChange} className='p-2 px-4 border w-2/3 rounded drop-shadow-lg hover:border-blue-400 focus:outline-none focus:border focus:border-blue-400' placeholder='Ưu đãi...' />
                                 {formik.errors.Discount && formik.touched.Discount && (
                                     <p className='m-0 mt-1 text-red-600'>{formik.errors.Discount}</p>
                                 )}
