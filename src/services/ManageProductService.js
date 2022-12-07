@@ -14,7 +14,7 @@ class ManageProductService extends baseService {
 
     getAll = (name) => {
         if (name) {
-            return this.get(`Product?name=${name}`)
+            return this.get(`Product?ProductName=${name}`)
         } else {
             return this.get(`Product`)
         }

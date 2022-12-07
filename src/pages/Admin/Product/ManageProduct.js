@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
-import { Input, Table } from 'antd';
+import { Input, Table, Popconfirm } from 'antd';
 import { history } from '../../../App';
 import { _add, _admin, _edit, _product } from '../../../utils/util/ConfigPath';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteProductAction, GetAllProductAction } from '../../../redux/Actions/ManageProductAction';
 import { DOMAIN_IMG } from '../../../utils/Settings/config';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { BsShop } from 'react-icons/bs';
 
 
 const { Search } = Input;
@@ -23,6 +24,9 @@ export default function ManageProduct() {
 
     const onSearch = (value) => {
         dispatch(GetAllProductAction(value))
+    };
+    const cancel = (e) => {
+        console.log(e);
     };
     const columns = [
         {
@@ -93,10 +97,16 @@ export default function ManageProduct() {
                     }}>
                         <EditOutlined style={{ fontSize: 25 }} />
                     </button>
-                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' onClick={() => {
-                        dispatch(DeleteProductAction(item.id))
-                    }}>
-                        <DeleteOutlined style={{ fontSize: 25 }} />
+                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa'>
+                        <Popconfirm
+                            title="Bạn có chắc muốn xóa sản phẩm không?"
+                            onConfirm={() => { dispatch(DeleteProductAction(item.id)) }}
+                            onCancel={cancel}
+                            okText="Có"
+                            cancelText="Không"
+                        >
+                            <DeleteOutlined style={{ fontSize: 25 }} />
+                        </Popconfirm>
                     </button>
                 </div>
             },
@@ -109,9 +119,12 @@ export default function ManageProduct() {
     return (
         <Fragment>
             <div className='mt-4'>
-                <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý quần áo</h2>
+                <div className='flex justify-center'>
+                    <h2 className='text-4xl font-bold text-red-500 flex items-center'><BsShop className='mx-2' />Quản lý quần áo</h2>
+
+                </div>
                 <div className='my-10 flex justify-between'>
-                    <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
+                    <button type='button' className='border-2 border-red-600 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
                         history.push(`${_admin}${_product}${_add}`)
                     }}>Thêm </button>
                     <div className='w-1/3'>

@@ -13,8 +13,9 @@ export const AddProductAction = (dataProduct) => {
         try {
             const result = await manageProductService.addProduct(dataProduct);
             if (result.status === 200) {
-                await message.success("Thêm mới thành công!")
                 history.push(`${_admin}${_product}`)
+                await message.success("Thêm mới thành công!")
+
             }
             else {
                 message.error("Thêm mới thất bại!")
@@ -37,8 +38,10 @@ export const GetAllProductAction = (name = '') => {
                     dataProduct: result.data
                 })
             }
+            else {
+                message.error("Không lấy được sản phẩm!")
+            }
         } catch (error) {
-            message.error("Không lấy được sản phẩm!")
             console.log('error', error.response?.data)
         }
     }

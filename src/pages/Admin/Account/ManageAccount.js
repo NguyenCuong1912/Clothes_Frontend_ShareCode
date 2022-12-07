@@ -6,7 +6,9 @@ import { history } from '../../../App';
 import { _account, _add, _admin, _edit } from '../../../utils/util/ConfigPath';
 import { DeleteUserAction, GetListUserAction } from './../../../redux/Actions/ManageUserAction';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Table, Input } from 'antd';
+import { Table, Input, Popconfirm } from 'antd';
+import { AiOutlineUser } from 'react-icons/ai';
+import { message } from 'antd';
 
 
 
@@ -24,6 +26,10 @@ export default function ManageAccount() {
 
     const onSearch = (value) => {
         dispatch(GetListUserAction(value))
+    };
+
+    const cancel = (e) => {
+        console.log(e);
     };
 
 
@@ -83,10 +89,17 @@ export default function ManageAccount() {
                     }}>
                         <EditOutlined style={{ fontSize: 25 }} />
                     </button>
-                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' onClick={() => {
-                        dispatch(DeleteUserAction(user.id))
-                    }}>
-                        <DeleteOutlined style={{ fontSize: 25 }} />
+
+                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' >
+                        <Popconfirm
+                            title="Bạn có muốn xóa tài khoản không?"
+                            onConfirm={() => { dispatch(DeleteUserAction(user.id)) }}
+                            onCancel={cancel}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <DeleteOutlined style={{ fontSize: 25 }} />
+                        </Popconfirm>
                     </button>
                 </div>
             },
@@ -96,9 +109,11 @@ export default function ManageAccount() {
     return (
         <Fragment>
             <div className='container mt-4'>
-                <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý Users</h2>
+                <div className='flex justify-center'>
+                    <h2 className='text-4xl font-bold text-red-500 flex items-center'><AiOutlineUser className='mx-2' />Quản lý Users</h2>
+                </div>
                 <div className='my-10 flex justify-between'>
-                    <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
+                    <button type='button' className='border-2 border-red-600 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
                         history.push(`${_admin}${_account}${_add}`)
                     }}>Thêm </button>
                     <div className='w-1/2'>
