@@ -33,7 +33,7 @@ export default function Login() {
     return (
         <div className='pt-48'>
             <div className="max-w-md mx-auto bg-white shadow-xl rounded-lg relative ">
-                <NavLink to={_home} title='Trang chủ' style={{ color: '#333F48' }} className='absolute top-4 left-4 text-2xl'>
+                <NavLink to={ _home } title='Trang chủ' style={ { color: '#333F48' } } className='absolute top-4 left-4 text-2xl'>
                     <AiFillHome className='hover:text-red-600' />
                 </NavLink>
                 <div className="text-center text-gray-600 py-4">Đăng nhập với</div>
@@ -50,29 +50,31 @@ export default function Login() {
                 <div className="bg-gray-200 pt-8 pb-16 rounded-b-lg">
                     <div className="text-center text-gray-600 mb-6">Hoặc đăng nhập bằng Tài khoản &amp; Mật khẩu</div>
                     <div className="w-4/5 mx-auto">
-                        <form onSubmit={formik.handleSubmit}>
+                        <form onSubmit={ formik.handleSubmit }>
                             <div className="flex items-center bg-white rounded shadow-md mb-4">
                                 <span className="px-3">
                                     <AiOutlineUser className='text-xl' />
                                 </span>
-                                <input className="w-full h-12 focus:outline-none" type="text" name="Username" onChange={formik.handleChange} placeholder="Tài khoản" />
-                                {formik.errors.Username && formik.touched.Username && (
-                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Username}</p>
-                                )}
+                                <input className="w-full h-12 focus:outline-none" type="text" name="Username" onChange={ formik.handleChange } placeholder="Tài khoản" />
+
                             </div>
+                            { formik.errors.Username && formik.touched.Username && (
+                                <p className='m-0 mt-1 text-red-600'>{ formik.errors.Username }</p>
+                            ) }
                             <div className="flex items-center bg-white rounded shadow-md mb-4">
                                 <span className="px-3">
                                     <svg className="fill-current text-gray-500 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 8V6a6 6 0 1 1 12 0h-3v2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" /></svg>
                                 </span>
-                                <input className="w-full h-12 focus:outline-none" type="password" name="Password" onChange={formik.handleChange} placeholder="Mật khẩu" />
-                                {formik.errors.Password && formik.touched.Password && (
-                                    <p className='m-0 mt-1 text-red-600'>{formik.errors.Password}</p>
-                                )}
+                                <input className="w-full h-12 focus:outline-none" type="password" name="Password" onChange={ formik.handleChange } placeholder="Mật khẩu" />
+
                             </div>
-                            <button type='submit' style={{ backgroundColor: '#333F48' }} className="block mx-auto text-white text-base font-medium uppercase rounded shadow-md px-6 py-2">Đăng nhập</button>
+                            { formik.errors.Password && formik.touched.Password && (
+                                <p className='m-0 mt-1 text-red-600'>{ formik.errors.Password }</p>
+                            ) }
+                            <button type='submit' style={ { backgroundColor: '#333F48' } } className="block mx-auto text-white text-base font-medium uppercase rounded shadow-md px-6 py-2">Đăng nhập</button>
                             <div className='mt-4'>
                                 <span>Bạn chưa có tài khoản?
-                                    <NavLink to={_register} className='ml-2 text-red-500 hover:text-red-700'>Đăng ký</NavLink>
+                                    <NavLink to={ _register } className='ml-2 text-red-500 hover:text-red-700'>Đăng ký</NavLink>
                                 </span>
                             </div>
                         </form>
